@@ -15,7 +15,7 @@ public class LevelDAO {
 
     private static final String URI = "/sellers/{id}/levels";
 
-    private static final RetryPolicy retryPolicy = RetryPolicy.builder()
+    private static final RetryPolicy<Integer> retryPolicy = RetryPolicy.<Integer>builder()
             .withMaxRetries(5)
             .withDelay(ofMillis(1000))
             .build();

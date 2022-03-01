@@ -18,7 +18,7 @@ public class SellerDAO {
 
     private static final String URI = "/sellers/{id}";
 
-    private static final RetryPolicy retryPolicy = RetryPolicy.builder()
+    private static final RetryPolicy<Optional<SellerDTO>> retryPolicy = RetryPolicy.<Optional<SellerDTO>>builder()
             .withMaxRetries(5)
             .withDelay(ofMillis(1000))
             .build();

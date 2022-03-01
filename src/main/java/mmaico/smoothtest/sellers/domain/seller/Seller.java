@@ -55,4 +55,8 @@ public class Seller {
     public Score getScore() {
         return score;
     }
+
+    public Integer getLevel() {
+        return level;
+    }
 }

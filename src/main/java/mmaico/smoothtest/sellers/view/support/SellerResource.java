@@ -11,13 +11,15 @@ public class SellerResource extends RepresentationModel<SellerResource> {
     private String id;
     private String name;
     private Date enrollment;
+    private int level;
 
     public SellerResource() {}
-    public SellerResource(String id, String name, Date enrollment) {
+    public SellerResource(String id, String name, Date enrollment, int level) {
         this();
         this.id = id;
         this.name = name;
         this.enrollment = enrollment;
+        this.level = level;
     }
 
     public String getId() {
@@ -42,6 +44,14 @@ public class SellerResource extends RepresentationModel<SellerResource> {
 
     public void setEnrollment(Date enrollment) {
         this.enrollment = enrollment;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     @JsonIgnore
