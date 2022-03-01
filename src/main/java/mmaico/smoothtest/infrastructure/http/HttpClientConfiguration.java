@@ -1,15 +1,15 @@
 package mmaico.smoothtest.infrastructure.http;
 
-import com.squareup.okhttp.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class HttpClientConfiguration {
 
     @Bean
-    public OkHttpClient httpClient() {
-        OkHttpClient client = new OkHttpClient();
+    public RestTemplate restTemplate() {
+        RestTemplate client = new RestTemplate();
         return client;
     }
 

@@ -1,44 +1,36 @@
 package mmaico.smoothtest.sellers.infrastructure;
 
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import dev.failsafe.RetryPolicy;
-import dev.failsafe.okhttp.FailsafeCall;
 import mmaico.smoothtest.sellers.domain.seller.Seller;
 import mmaico.smoothtest.sellers.domain.seller.SellerRepository;
-//import net.jodah.failsafe.RetryPolicy;
+import mmaico.smoothtest.sellers.infrastructure.dao.LevelDAO;
+import mmaico.smoothtest.sellers.infrastructure.dao.SellerDAO;
+import mmaico.smoothtest.sellers.infrastructure.dao.dto.SellerDTO;
+import mmaico.smoothtest.sellers.infrastructure.translate.SellerTranslate;
 import org.springframework.stereotype.Repository;
 
-import java.time.Duration;
 import java.util.Optional;
-
-import static java.time.Duration.ofMillis;
 
 @Repository
 public class SellerRepositoryImpl implements SellerRepository {
 
-    private static final RetryPolicy retryPolicy = RetryPolicy.builder()
-            .withMaxRetries(5)
-            .withDelay(ofMillis(1000))
-            .build();
+    private SellerDAO sellerDAO;
+    private LevelDAO levelDAO;
+    private SellerTranslate translate;
 
-
-    private OkHttpClient client;
-
-    public SellerRepositoryImpl(OkHttpClient client) {
-        this.client = client;
+    public SellerRepositoryImpl(SellerDAO sellerDAO, LevelDAO levelDAO, SellerTranslate translate) {
+        this.sellerDAO = sellerDAO;
+        this.levelDAO = levelDAO;
+        this.translate = translate;
     }
 
     @Override
     public Optional<Seller> findOne(String id) {
-        Request request = new Request.Builder().url("").build();
-        Call newCall = this.client.newCall(request);
+        Optional<SellerDTO> seller = sellerDAO.getSeller(id);
+        int level = levelDAO.getLevelBy(id);
 
-        //FailsafeCall.with(retryPolicy).compose(newCall);
+        if (seller.isPresent()) return Optional.empty();
 
-        return Optional.empty();
+        return Optional.of(translate.translate(seller.get(), level));
     }
 
     @Override
