@@ -13,6 +13,7 @@ import java.util.Optional;
 @Repository
 public class SellerRepositoryImpl implements SellerRepository {
 
+    private static final int LEVEL_DEFAULT = 5;
     private SellerDAO sellerDAO;
     private LevelDAO levelDAO;
     private SellerTranslate translate;
@@ -35,6 +36,13 @@ public class SellerRepositoryImpl implements SellerRepository {
 
     @Override
     public Seller save(Seller seller) {
-        return null;
+        SellerDTO dto = new SellerDTO();
+        dto.setName(seller.getName());
+        dto.setScoreId(seller.getScore().getId());
+
+        SellerDTO result = sellerDAO.createSeller(dto)
+                .orElseThrow(() -> new RuntimeException("Error when create"));
+
+        return translate.translate(result, LEVEL_DEFAULT);
     }
 }

@@ -25,6 +25,7 @@ public class SellerEndpoint {
     }
 
     @PostMapping ("/sellers")
+    @ResponseStatus(HttpStatus.CREATED)
     public SellerResource create(@RequestBody SellerResource resource) {
         Seller seller = Seller.buildBy(resource.getName(), resource.getScoreId());
         Seller sellerSaved = seller.save();
