@@ -28,7 +28,7 @@ public class SellerRepositoryImpl implements SellerRepository {
         Optional<SellerDTO> seller = sellerDAO.getSeller(id);
         int level = levelDAO.getLevelBy(id);
 
-        if (seller.isPresent()) return Optional.empty();
+        if (!seller.isPresent()) return Optional.empty();
 
         return Optional.of(translate.translate(seller.get(), level));
     }

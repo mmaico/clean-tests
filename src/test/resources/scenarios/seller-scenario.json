@@ -1,6 +1,80 @@
 [
   {
-    "scenario": "",
-    "json": {}
+    "scenario": "seller with id 53ac008b-9d16-4c36-afea-0e49c0c3515a",
+    "json": {
+      "request": {
+        "method": "GET",
+        "urlPath": "/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "id": "53ac008b-9d16-4c36-afea-0e49c0c3515a",
+          "name": "Boba Fett",
+          "enrollment": "2018-12-06T17:58:16",
+          "scoreId": "552544458"
+        }
+      }
+    }
+  },
+
+  {
+    "scenario": "seller level with id 53ac008b-9d16-4c36-afea-0e49c0c3515a",
+    "json": {
+      "request": {
+        "method": "GET",
+        "urlPath": "/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a/levels"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "value": 5
+        }
+      }
+    }
+  },
+  {
+    "scenario": "seller to be created",
+    "json": {
+      "name": "Mandalorian",
+      "_links": {
+        "hasScore": {
+          "href": "/sellers/scores/5524"
+        }
+      }
+    }
+  },
+  {
+    "scenario": "Create a new seller with all valid parameters",
+    "json": {
+      "request": {
+        "method": "POST",
+        "urlPath": "/sellers",
+        "bodyPatterns": [
+          {
+            "equalToJson": "{ \"name\": \"Mandalorian\", \"scoreId\": \"5524\" }",
+            "ignoreExtraElements": true
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "id": "${uuid.get()}",
+          "name": "Mandalorian",
+          "enrollment": "2018-12-06T17:58:16",
+          "scoreId": "5524"
+        }
+      }
+    }
   }
 ]

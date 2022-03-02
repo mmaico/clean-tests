@@ -1,6 +1,6 @@
 package mmaico.smoothtest.sellers.view.support;
 
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
@@ -56,6 +56,6 @@ public class SellerResource extends RepresentationModel<SellerResource> {
 
     @JsonIgnore
     public String getScoreId() {
-        return this.getRequiredLink("score").getHref().replace("/sellers/scores/", "");
+        return this.getRequiredLink("hasScore").getHref().replace("/sellers/scores/", "");
     }
 }

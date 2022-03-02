@@ -12,8 +12,10 @@ public class SellerResourceAssembler implements RepresentationModelAssembler<Sel
     @Override
     public SellerResource toModel(Seller model) {
         SellerResource resource = new SellerResource(model.getId(), model.getName(), model.getEnrollment(), model.getLevel());
-        resource.add(Link.of("/sellers/{}/contacts".replace("{}", model.getId()) , "has-contacts"));
-        resource.add(Link.of("/sellers/scores/{}".replace("{}", model.getScore().getId()) , "has-score"));
+
+        resource.add(Link.of("/sellers/{}".replace("{}", model.getId())));
+        resource.add(Link.of("/sellers/{}/contacts".replace("{}", model.getId()), "hasContacts"));
+        resource.add(Link.of("/sellers/scores/{}".replace("{}", model.getScore().getId()), "hasScore"));
 
         return resource;
     }

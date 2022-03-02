@@ -3,6 +3,8 @@ package mmaico.smoothtest.sellers.infrastructure.dao;
 
 import dev.failsafe.Failsafe;
 import dev.failsafe.RetryPolicy;
+import mmaico.smoothtest.sellers.infrastructure.dao.dto.LevelDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +24,9 @@ public class LevelDAO {
 
     private RestTemplate restTemplate;
 
+    @Value("${seller.service}")
+    private String host;
+
 
     public LevelDAO(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -30,11 +35,11 @@ public class LevelDAO {
     public int getLevelBy(String sellerId) {
         String uri = URI.replace("{id}", sellerId);
         return Failsafe.with(retryPolicy).get(() -> {
-            ResponseEntity<Integer> response = restTemplate.getForEntity(uri, Integer.class);
+            ResponseEntity<LevelDTO> response = restTemplate.getForEntity(host + uri, LevelDTO.class);
             if (response.getStatusCode() != OK) {
                 throw new RuntimeException("Retry again");
             }
-            return response.getStatusCode() == OK ? response.getBody() : 0;
+            return response.getStatusCode() == OK ? response.getBody().getValue() : 0;
         });
     }
 }
