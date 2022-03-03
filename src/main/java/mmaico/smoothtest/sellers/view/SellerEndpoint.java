@@ -3,8 +3,11 @@ package mmaico.smoothtest.sellers.view;
 import mmaico.smoothtest.sellers.domain.seller.Seller;
 import mmaico.smoothtest.sellers.view.support.SellerResource;
 import mmaico.smoothtest.sellers.view.support.SellerResourceAssembler;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class SellerEndpoint {
@@ -30,5 +33,11 @@ public class SellerEndpoint {
         Seller seller = Seller.buildBy(resource.getName(), resource.getScoreId());
         Seller sellerSaved = seller.save();
         return assembler.toModel(sellerSaved);
+    }
+
+    @GetMapping ("/sellers")
+    @ResponseStatus(HttpStatus.OK)
+    public CollectionModel<SellerResource> getAll() {
+        return assembler.toCollectionModel(Seller.findAll());
     }
 }

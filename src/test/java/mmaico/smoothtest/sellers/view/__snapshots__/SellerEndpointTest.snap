@@ -3,6 +3,16 @@ should create a new seller=[
 ]
 
 
+should find all sellers registered=[
+  "{\"_embedded\":{\"sellers\":[{\"id\":\"ba262eb0-5178-4a94-9771-49dd77b1c846\",\"name\":\"Baby Yoda\",\"enrollment\":\"2022-03-03T11:54:35.859+0000\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/ba262eb0-5178-4a94-9771-49dd77b1c846\"},\"hasContacts\":{\"href\":\"/sellers/ba262eb0-5178-4a94-9771-49dd77b1c846/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/55236\"}}},{\"id\":\"f6724b21-6c23-40a6-960e-233574fad5de\",\"name\":\"Jabba\",\"enrollment\":\"2022-03-03T11:54:35.859+0000\",\"level\":4,\"_links\":{\"self\":{\"href\":\"/sellers/f6724b21-6c23-40a6-960e-233574fad5de\"},\"hasContacts\":{\"href\":\"/sellers/f6724b21-6c23-40a6-960e-233574fad5de/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/6464564\"}}},{\"id\":\"cd694802-dd85-4248-b80f-d974a2d8dbe4\",\"name\":\"Jango Fett\",\"enrollment\":\"2022-03-03T11:54:35.859+0000\",\"level\":8,\"_links\":{\"self\":{\"href\":\"/sellers/cd694802-dd85-4248-b80f-d974a2d8dbe4\"},\"hasContacts\":{\"href\":\"/sellers/cd694802-dd85-4248-b80f-d974a2d8dbe4/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/9998887\"}}}]}}"
+]
+
+
+should return seller by id using retry=[
+  "{\"id\":\"68dcf440-d1fe-4ff0-ae71-9db139f77a8e\",\"name\":\"Chewbacca\",\"enrollment\":\"2022-12-06T17:58:16.000+0000\",\"level\":9,\"_links\":{\"self\":{\"href\":\"/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e\"},\"hasContacts\":{\"href\":\"/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/9995562325\"}}}"
+]
+
+
 should return seller by id=[
   "{\"id\":\"53ac008b-9d16-4c36-afea-0e49c0c3515a\",\"name\":\"Boba Fett\",\"enrollment\":\"2018-12-06T17:58:16.000+0000\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a\"},\"hasContacts\":{\"href\":\"/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/552544458\"}}}"
 ]

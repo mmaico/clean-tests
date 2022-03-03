@@ -25,7 +25,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class SellerDAO {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(SellerDAO.class);
-    private static final String TEMPLATE = "result={} elapsedTime={} method={} uri={}";
+
     private static final String URI_GET = "/sellers/{id}";
     private static final String URI_POST = "/sellers";
 
@@ -43,18 +43,14 @@ public class SellerDAO {
 
     public SellerDAO(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
+     //   this.restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
     }
 
     public Optional<SellerDTO> getSeller(String sellerId) {
         String uri = URI_GET.replace("{id}", sellerId);
         return Failsafe.with(retryPolicy).get(() -> {
-            StopWatch stopWatch = new StopWatch();
-            stopWatch.start();
             ResponseEntity<SellerDTO> response = restTemplate.getForEntity(host + uri, SellerDTO.class);
-            stopWatch.stop();
 
-            LOGGER.info(TEMPLATE, response.getStatusCode(), stopWatch.getTotalTimeMillis(),  "GET", uri);
             if (response.getStatusCode() != OK) {
                 throw new RuntimeException("Retry again");
             }
@@ -64,13 +60,9 @@ public class SellerDAO {
 
     public Optional<SellerDTO> createSeller(SellerDTO dto) {
         return Failsafe.with(retryPolicy).get(() -> {
-            StopWatch stopWatch = new StopWatch();
-            stopWatch.start();
             HttpEntity<SellerDTO> request = new HttpEntity<>(dto);
             ResponseEntity<SellerDTO> response = restTemplate.postForEntity(host + URI_POST, request, SellerDTO.class);
-            stopWatch.stop();
 
-            LOGGER.info(TEMPLATE, response.getStatusCode(), stopWatch.getTotalTimeMillis(),  "POST", URI_POST);
             if (response.getStatusCode() != CREATED) {
                 throw new RuntimeException("Retry again");
             }

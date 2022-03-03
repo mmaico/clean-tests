@@ -5,6 +5,7 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.stubbing.StubMapping;
 import mmaico.smoothtest.infratest.helpers.StringTemplateHelper;
+import mmaico.smoothtest.infratest.helpers.template.MathHelper;
 import mmaico.smoothtest.infratest.helpers.template.UUIDHelper;
 import mmaico.smoothtest.infratest.scenarios.ScenarioLoaderHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class BaseTest {
     protected void stub(String scenario, Object... params) {
         Map<String, Object> helpers = toMap(params);
         helpers.put("uuid", UUIDHelper.getInstance());
+        helpers.put("math", MathHelper.getInstance());
+
 
         String jsonResult = this.scenarios.getScenario(scenario).getJson();
         String jsonRender = StringTemplateHelper.render(jsonResult, helpers);

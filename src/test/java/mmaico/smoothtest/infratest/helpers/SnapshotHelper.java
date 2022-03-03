@@ -11,8 +11,8 @@ public class SnapshotHelper {
     public static String getJson(String prefix, String scenario) {
         if (isBlank(scenario)) return "";
 
-        return unescapeJava(scenario.replace(prefix, ""))
-                .replaceAll("\\n", "").replaceAll("\"\\{", "{")
-                .replaceAll("}\"", "}").replaceAll("[\\[\\]]", "");
+        return StringUtils.chop(unescapeJava(scenario.replace(prefix + "[", "")).trim())
+                .replaceAll("\"\\{", "{")
+                .replaceAll("}\"", "}");
     }
 }

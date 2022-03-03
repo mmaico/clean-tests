@@ -76,5 +76,84 @@
         }
       }
     }
+  },
+  {
+    "scenario": "Seller search result (start)",
+    "json": {
+      "scenarioName": "findSellerById",
+      "requiredScenarioState": "Started",
+      "newScenarioState": "Call-2",
+      "request": {
+        "method": "GET",
+        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {}
+      }
+    }
+  },
+  {
+    "scenario": "Seller search result not finished yet (intermediate)",
+    "json": {
+      "scenarioName": "findSellerById",
+      "requiredScenarioState": "Call-$count",
+      "newScenarioState": "Call-$math.addMoreOne($count)",
+      "request": {
+        "method": "GET",
+        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody" : {}
+      }
+    }
+  },
+  {
+    "scenario": "Ended seller search result (end)",
+    "json": {
+      "scenarioName": "findSellerById",
+      "requiredScenarioState": "Call-5",
+      "request": {
+        "method": "GET",
+        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "id": "68dcf440-d1fe-4ff0-ae71-9db139f77a8e",
+          "name": "Chewbacca",
+          "enrollment": "2022-12-06T17:58:16",
+          "scoreId": "9995562325"
+        }
+      }
+    }
+  },
+  {
+    "scenario": "seller level with id 68dcf440-d1fe-4ff0-ae71-9db139f77a8e",
+    "json": {
+      "request": {
+        "method": "GET",
+        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e/levels"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "value": 9
+        }
+      }
+    }
   }
 ]

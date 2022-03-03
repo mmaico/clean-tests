@@ -1,5 +1,6 @@
 package mmaico.smoothtest.sellers.infrastructure;
 
+import mmaico.smoothtest.sellers.domain.score.Score;
 import mmaico.smoothtest.sellers.domain.seller.Seller;
 import mmaico.smoothtest.sellers.domain.seller.SellerRepository;
 import mmaico.smoothtest.sellers.infrastructure.dao.LevelDAO;
@@ -8,7 +9,10 @@ import mmaico.smoothtest.sellers.infrastructure.dao.dto.SellerDTO;
 import mmaico.smoothtest.sellers.infrastructure.translate.SellerTranslate;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static java.util.Arrays.asList;
 
 @Repository
 public class SellerRepositoryImpl implements SellerRepository {
@@ -44,5 +48,13 @@ public class SellerRepositoryImpl implements SellerRepository {
                 .orElseThrow(() -> new RuntimeException("Error when create"));
 
         return translate.translate(result, LEVEL_DEFAULT);
+    }
+
+    @Override
+    public List<Seller> findAll() {
+        Seller babyYoda = new Seller("ba262eb0-5178-4a94-9771-49dd77b1c846", "Baby Yoda", new Date(), new Score("55236"), 5);
+        Seller jabba = new Seller("f6724b21-6c23-40a6-960e-233574fad5de", "Jabba", new Date(), new Score("6464564"), 4);
+        Seller jango = new Seller("cd694802-dd85-4248-b80f-d974a2d8dbe4", "Jango Fett", new Date(), new Score("9998887"), 8);
+        return asList(babyYoda, jabba, jango);
     }
 }

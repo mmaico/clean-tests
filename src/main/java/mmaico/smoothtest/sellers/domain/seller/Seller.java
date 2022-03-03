@@ -3,6 +3,7 @@ package mmaico.smoothtest.sellers.domain.seller;
 import mmaico.smoothtest.sellers.domain.score.Score;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,13 +27,14 @@ public class Seller {
         this.repository = getBean(SellerRepository.class);
     }
 
-    public Seller(String id, String name) {
-        this(id, name, new Date(), new Score(""), 0);
-    }
-
     public static Optional<Seller> findOne(String id) {
         return getBean(SellerRepository.class).findOne(id);
     }
+
+    public static List<Seller> findAll() {
+        return getBean(SellerRepository.class).findAll();
+    }
+
     public static Seller buildBy(String name, String scoreId) {
         return new Seller(UUID.randomUUID().toString(), name, new Date(), new Score(scoreId), 0);
     }
