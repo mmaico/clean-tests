@@ -1,8 +1,8 @@
-should return seller by id=[
-  "{\"id\":\"53ac008b-9d16-4c36-afea-0e49c0c3515a\",\"name\":\"Boba Fett\",\"enrollment\":\"2018-12-06T17:58:16.000+0000\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a\"},\"hasContacts\":{\"href\":\"/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/552544458\"}}}"
+should create a new seller=[
+  "{\"id\":\"d1e6bffe-94a1-4939-b80d-5598c326d6c8\",\"name\":\"Mandalorian\",\"enrollment\":\"2018-12-06T17:58:16.000+0000\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/d1e6bffe-94a1-4939-b80d-5598c326d6c8\"},\"hasContacts\":{\"href\":\"/sellers/d1e6bffe-94a1-4939-b80d-5598c326d6c8/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/5524\"}}}"
 ]
 
 
-should_create_a_new_seller=[
-  "{\"id\":\"b4fe04d8-2353-4305-a753-3f0452984c68\",\"name\":\"Mandalorian\",\"enrollment\":\"2018-12-06T17:58:16.000+00:00\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/b4fe04d8-2353-4305-a753-3f0452984c68\"},\"hasContacts\":{\"href\":\"/sellers/b4fe04d8-2353-4305-a753-3f0452984c68/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/5524\"}}}"
+should return seller by id=[
+  "{\"id\":\"53ac008b-9d16-4c36-afea-0e49c0c3515a\",\"name\":\"Boba Fett\",\"enrollment\":\"2018-12-06T17:58:16.000+0000\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a\"},\"hasContacts\":{\"href\":\"/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/552544458\"}}}"
 ]

@@ -70,7 +70,7 @@ class SellerEndpointTest extends BaseTest {
             assertEquals(OK.value(), response.getResponse().getStatus());
     }
 
-    @SnapshotName("should_create_a_new_seller")
+    @SnapshotName("should create a new seller")
     @Test
     public void shouldCreateANewSeller() throws Exception {
         Given("a seller with all valid data");
