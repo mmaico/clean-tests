@@ -1,5 +1,6 @@
 package mmaico.smoothtest.sellers.view.support;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
@@ -10,6 +11,7 @@ import java.util.Date;
 public class SellerResource extends RepresentationModel<SellerResource> {
     private String id;
     private String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private Date enrollment;
     private int level;
 
