@@ -22,6 +22,59 @@
   },
 
   {
+    "scenario": "find all sellers registered",
+    "json": {
+      "request": {
+        "method": "GET",
+        "urlPath": "/sellers"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": [
+          {
+            "id": "ba262eb0-5178-4a94-9771-49dd77b1c846",
+            "name": "Baby Yoda",
+            "enrollment": "2018-12-06T17:58:16",
+            "scoreId": "55236"
+          },
+          {
+            "id": "f6724b21-6c23-40a6-960e-233574fad5de",
+            "name": "Jabba",
+            "enrollment": "2018-12-06T17:58:16",
+            "scoreId": "6464564"
+          },
+          {
+            "id": "cd694802-dd85-4248-b80f-d974a2d8dbe4",
+            "name": "Jango Fett",
+            "enrollment": "2018-12-06T17:58:16",
+            "scoreId": "9998887"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "seller level for a list",
+    "json": {
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "^(\/sellers\/(ba262eb0-5178-4a94-9771-49dd77b1c846|f6724b21-6c23-40a6-960e-233574fad5de|cd694802-dd85-4248-b80f-d974a2d8dbe4)\/levels)$"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "value": 4
+        }
+      }
+    }
+  },
+  {
     "scenario": "seller level with id 53ac008b-9d16-4c36-afea-0e49c0c3515a",
     "json": {
       "request": {

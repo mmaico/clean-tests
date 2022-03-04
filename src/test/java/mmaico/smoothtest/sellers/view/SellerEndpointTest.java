@@ -13,7 +13,6 @@ import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import static java.util.Arrays.asList;
 import static mmaico.smoothtest.infratest.BDD.*;
@@ -102,6 +101,9 @@ class SellerEndpointTest extends BaseTest {
     @Test
     public void shouldFindAllSellersRegistered() throws Exception {
         Given("a sellers api");
+            stub("find all sellers registered");
+        And("have a seller level default for each request");
+            stub("seller level for a list");
         When("the api is called");
             MvcResult response = mockMvc.perform(get("/sellers")
                 .contentType("application/hal+json")).andReturn();
