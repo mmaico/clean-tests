@@ -1,0 +1,55 @@
+[
+  {
+    "scenario": "seller with id 53ac008b-9d16-4c36-afea-0e49c0c3515a v3",
+    "json": {
+        "id": "53ac008b-9d16-4c36-afea-0e49c0c3515a",
+        "name": "Boba Fett",
+        "enrollment": "2018-12-06T17:58:16",
+        "scoreId": "552544458"
+    }
+  },
+  {
+    "scenario": "seller level 5",
+    "json": {
+      "value": 5
+    }
+  },
+  {
+    "scenario": "seller level 4",
+    "json": {
+      "value": 4
+    }
+  },
+  {
+    "scenario": "seller with id d580d1a0-9530-4b10-97b2-4b21de75d33a v3",
+    "json": {
+      "id": "d580d1a0-9530-4b10-97b2-4b21de75d33a",
+      "name": "Han Solo",
+      "enrollment": "2018-12-06T17:58:16",
+      "scoreId": "48847"
+    }
+  },
+  {
+    "scenario": "all sellers v3",
+    "json": [
+      {
+        "id": "ba262eb0-5178-4a94-9771-49dd77b1c846",
+        "name": "Baby Yoda",
+        "enrollment": "2018-12-06T17:58:16",
+        "scoreId": "55236"
+      },
+      {
+        "id": "f6724b21-6c23-40a6-960e-233574fad5de",
+        "name": "Jabba",
+        "enrollment": "2018-12-06T17:58:16",
+        "scoreId": "6464564"
+      },
+      {
+        "id": "cd694802-dd85-4248-b80f-d974a2d8dbe4",
+        "name": "Jango Fett",
+        "enrollment": "2018-12-06T17:58:16",
+        "scoreId": "9998887"
+      }
+    ]
+  }
+]
