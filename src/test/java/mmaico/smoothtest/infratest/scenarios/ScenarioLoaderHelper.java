@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jayway.jsonpath.JsonPath;
+import net.minidev.json.JSONArray;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -36,9 +37,14 @@ public class ScenarioLoaderHelper {
             final List<Object> scenariosToInsert = JsonPath.parse(json).read("$.[*]", ArrayList.class);
 
             Set<Scenario> items = scenariosToInsert.stream()
-                    .map(scenarioToInsert -> (LinkedHashMap<String, String>) scenarioToInsert)
-                    .map(scenarioToInsert -> new Scenario(scenarioToInsert.get("scenario"), gson.toJson(scenarioToInsert.get("json"), LinkedHashMap.class)))
-                    .collect(Collectors.toSet());
+                    .map(scenarioToInsert -> (LinkedHashMap<String, Object>) scenarioToInsert)
+                    .map(scenarioToInsert -> {
+                        if (scenarioToInsert.get("json") instanceof JSONArray) {
+                            return new Scenario(scenarioToInsert.get("scenario").toString(), gson.toJson(scenarioToInsert.get("json"), JSONArray.class));
+                        } else {
+                            return new Scenario(scenarioToInsert.get("scenario").toString(), gson.toJson(scenarioToInsert.get("json"), LinkedHashMap.class));
+                        }
+                    }).collect(Collectors.toSet());
 
             scenarios.addAll(items);
         }
