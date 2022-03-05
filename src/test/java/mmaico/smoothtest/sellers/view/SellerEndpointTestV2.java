@@ -3,12 +3,14 @@ package mmaico.smoothtest.sellers.view;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.stubbing.Scenario;
-import mmaico.smoothtest.infratest.BDD;
 import mmaico.smoothtest.infratest.BaseTest;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+
+import java.io.IOException;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static mmaico.smoothtest.infratest.BDD.*;
@@ -18,46 +20,21 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Test with Maturity level 2
+ *  Statement BDD OK
+ *  Json Inside scenario file OK <----
+ *  Wiremock inside scenario file NOK
+ *  Match Snapshot NOK
+ *  Custom comparator for dynamic fields NOK
+ */
 class SellerEndpointTestV2 extends BaseTest {
 
-    private static final String SELLER_BY_ID_PAYLOAD_JSON = "{\n" +
-            "          \"id\": \"53ac008b-9d16-4c36-afea-0e49c0c3515a\",\n" +
-            "          \"name\": \"Boba Fett\",\n" +
-            "          \"enrollment\": \"2018-12-06T17:58:16\",\n" +
-            "          \"scoreId\": \"552544458\"\n" +
-            "        }";
 
-    private static final String SELLER_BY_ID_PAYLOAD_JSON2 = "{\n" +
-            "          \"id\": \"d580d1a0-9530-4b10-97b2-4b21de75d33a\",\n" +
-            "          \"name\": \"Han Solo\",\n" +
-            "          \"enrollment\": \"2018-12-06T17:58:16\",\n" +
-            "          \"scoreId\": \"48847\"\n" +
-            "        }";
-
-    private static final String LEVEL_SELLER_PAYLOAD_JSON = "{\"value\": 5}";
-
-    private static final String LEVEL_4_SELLER_PAYLOAD_JSON = "{\"value\": 4}";
-
-    private static final String SELLERS_PAYLOAD_JSON = "[\n" +
-            "          {\n" +
-            "            \"id\": \"ba262eb0-5178-4a94-9771-49dd77b1c846\",\n" +
-            "            \"name\": \"Baby Yoda\",\n" +
-            "            \"enrollment\": \"2018-12-06T17:58:16\",\n" +
-            "            \"scoreId\": \"55236\"\n" +
-            "          },\n" +
-            "          {\n" +
-            "            \"id\": \"f6724b21-6c23-40a6-960e-233574fad5de\",\n" +
-            "            \"name\": \"Jabba\",\n" +
-            "            \"enrollment\": \"2018-12-06T17:58:16\",\n" +
-            "            \"scoreId\": \"6464564\"\n" +
-            "          },\n" +
-            "          {\n" +
-            "            \"id\": \"cd694802-dd85-4248-b80f-d974a2d8dbe4\",\n" +
-            "            \"name\": \"Jango Fett\",\n" +
-            "            \"enrollment\": \"2018-12-06T17:58:16\",\n" +
-            "            \"scoreId\": \"9998887\"\n" +
-            "          }\n" +
-            "        ]";
+    @BeforeAll
+    public static void beforeAll() throws IOException {
+        scenarios.load("seller-scenariov3.json");
+    }
 
     @Test
     public void shouldReturnSellerById() throws Exception {
@@ -66,13 +43,13 @@ class SellerEndpointTestV2 extends BaseTest {
             stubFor(WireMock.get(urlEqualTo(sellerUri)).willReturn(aResponse()
                 .withStatus(OK.value())
                 .withHeader(CONTENT_TYPE, "application/json")
-                .withBody(SELLER_BY_ID_PAYLOAD_JSON)));
+                .withBody(s("seller with id 53ac008b-9d16-4c36-afea-0e49c0c3515a v3"))));
         And("has a velid level");
             String levelUri = "/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a/levels";
             stubFor(WireMock.get(urlEqualTo(levelUri)).willReturn(aResponse()
                     .withStatus(OK.value())
                     .withHeader(CONTENT_TYPE, "application/json")
-                    .withBody(LEVEL_SELLER_PAYLOAD_JSON)));
+                    .withBody(s("seller level 5"))));
         When("the api is called passing a id");
             ResultActions perform = mockMvc.perform(get("/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a"));
 
@@ -95,14 +72,14 @@ class SellerEndpointTestV2 extends BaseTest {
             stubFor(WireMock.get(urlEqualTo(sellerUri)).willReturn(aResponse()
                     .withStatus(OK.value())
                     .withHeader(CONTENT_TYPE, "application/json")
-                    .withBody(SELLERS_PAYLOAD_JSON)));
+                    .withBody(s("all sellers v3"))));
         And("have a seller level default for each request");
             String levelUri = "^(\\/sellers\\/(ba262eb0-5178-4a94-9771-49dd77b1c846|f6724b21-6c23-40a6-960e-233574fad5de|cd694802-dd85-4248-b80f-d974a2d8dbe4)\\/levels)$";
 
             stubFor(WireMock.get(urlPathMatching(levelUri)).willReturn(aResponse()
                 .withStatus(OK.value())
                 .withHeader(CONTENT_TYPE, "application/json")
-                .withBody(LEVEL_4_SELLER_PAYLOAD_JSON)));
+                .withBody(s("seller level 4"))));
         When("the api is called");
             ResultActions resultActions = mockMvc.perform(get("/sellers"))
                 .andExpect(status().isOk());
@@ -155,14 +132,14 @@ class SellerEndpointTestV2 extends BaseTest {
                     .willReturn(aResponse()
                             .withStatus(200)
                             .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                            .withBody(SELLER_BY_ID_PAYLOAD_JSON2)));
+                            .withBody(s("seller with id d580d1a0-9530-4b10-97b2-4b21de75d33a v3"))));
             stubNCalls(sellerUri, HttpStatus.SERVICE_UNAVAILABLE, "{}", 4);
         And("has a velid level");
             String levelUri = "/sellers/d580d1a0-9530-4b10-97b2-4b21de75d33a/levels";
             stubFor(WireMock.get(urlEqualTo(levelUri)).willReturn(aResponse()
                 .withStatus(OK.value())
                 .withHeader(CONTENT_TYPE, "application/json")
-                .withBody(LEVEL_SELLER_PAYLOAD_JSON)));
+                .withBody(s("seller level 5"))));
 
         When("the api is called passing a id");
             ResultActions resultActions = mockMvc.perform(get("/sellers/d580d1a0-9530-4b10-97b2-4b21de75d33a"))

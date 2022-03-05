@@ -9,39 +9,31 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.skyscreamer.jsonassert.comparator.CustomComparator;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.io.IOException;
 
 import static java.util.Arrays.asList;
 import static mmaico.smoothtest.infratest.BDD.*;
-import static mmaico.smoothtest.infratest.comparators.Comparators.comparators;
-import static mmaico.smoothtest.infratest.comparators.DateExpressionMatcher.isDate;
-import static mmaico.smoothtest.infratest.comparators.IsPresentExpressionMatcher.isPresent;
-import static mmaico.smoothtest.infratest.comparators.StringSizeExpressionMatcher.stringSize;
-import static mmaico.smoothtest.infratest.snapshot.SnapshotComparatorTest.c;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+/**
+ * Test with Maturity level 4
+ *  Statement BDD OK
+ *  Json Inside scenario file OK
+ *  Wiremock inside scenario file OK
+ *  Match Snapshot OK <---
+ *  Custom comparator for dynamic fields NOK
+ */
 @ExtendWith({SnapshotExtension.class})
-class SellerEndpointTest extends BaseTest {
+class SellerEndpointTestV4 extends BaseTest {
 
-    private final CustomComparator item = comparators(STRICT,
-            stringSize(36, "id"),
-            isPresent("_links.hasContacts.href"),
-            isPresent("_links.self.href"),
-            isDate( "enrollment")
-    );
-
-    private final CustomComparator list = comparators(STRICT, isDate( "_embedded.sellers[0,3].enrollment"));
 
     private Expect expect;
-
 
     @BeforeAll
     public static void beforeAll() throws IOException {
@@ -63,8 +55,8 @@ class SellerEndpointTest extends BaseTest {
         When("the api is called passing a id");
             MvcResult response = mockMvc.perform(get("/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a")).andReturn();
         Then("must return the seller with all the data");
-            expect.toMatchSnapshot(response.getResponse().getContentAsString());
             assertEquals(OK.value(), response.getResponse().getStatus());
+            expect.toMatchSnapshot(response.getResponse().getContentAsString());
     }
 
     @SnapshotName("should return seller by id using retry")
@@ -81,20 +73,7 @@ class SellerEndpointTest extends BaseTest {
         Then("must return the seller with all the data");
             expect.toMatchSnapshot(response.getResponse().getContentAsString());
             assertEquals(OK.value(), response.getResponse().getStatus());
-    }
 
-    @SnapshotName("should create a new seller")
-    @Test
-    public void shouldCreateANewSeller() throws Exception {
-        Given("a seller with all valid data");
-            stub("Create a new seller with all valid parameters");
-        When("the api is called passing a id");
-            MvcResult response = mockMvc.perform(post("/sellers")
-                            .contentType("application/hal+json")
-                            .content(s("seller to be created"))).andReturn();
-        Then("must return the seller with all the data");
-            assertEquals(CREATED.value(), response.getResponse().getStatus());
-            expect.comparator(c(item)).toMatchSnapshot(response.getResponse().getContentAsString());
     }
 
     @SnapshotName("should find all sellers registered")
@@ -105,12 +84,29 @@ class SellerEndpointTest extends BaseTest {
         And("have a seller level default for each request");
             stub("seller level for a list");
         When("the api is called");
-            MvcResult response = mockMvc.perform(get("/sellers")
-                .contentType("application/hal+json")).andReturn();
+            MvcResult response = mockMvc.perform(get("/sellers")).andReturn();
         Then("must return all sellers registered");
             assertEquals(OK.value(), response.getResponse().getStatus());
-            expect.comparator(c(list)).toMatchSnapshot(response.getResponse().getContentAsString());
+            expect.toMatchSnapshot(response.getResponse().getContentAsString());
     }
 
+    /**
+     * This test will fail because the return a dynamic id, the solution to this problem
+     * is in the custom comparator implemented in the main test
+     * @throws Exception
+     */
+    @SnapshotName("should create a new seller")
+    @Test
+    public void shouldCreateANewSeller() throws Exception {
+        Given("a seller with all valid data");
+            stub("Create a new seller with all valid parameters");
+        When("the api is called passing a id");
+            MvcResult response = mockMvc.perform(post("/sellers")
+                .contentType("application/hal+json")
+                .content(s("seller to be created"))).andReturn();
+        Then("must return the seller with all the data");
+            assertEquals(CREATED.value(), response.getResponse().getStatus());
+            expect.toMatchSnapshot(response.getResponse().getContentAsString());
+    }
 
 }
