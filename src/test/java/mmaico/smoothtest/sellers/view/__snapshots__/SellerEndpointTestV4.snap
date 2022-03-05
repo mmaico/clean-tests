@@ -1,5 +1,5 @@
 should create a new seller=[
-  "{\"id\":\"290b2ec9-fbe8-4bb1-9160-cadcf9182a23\",\"name\":\"Mandalorian\",\"enrollment\":\"2018-12-06T17:58:16.000+0000\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/290b2ec9-fbe8-4bb1-9160-cadcf9182a23\"},\"hasContacts\":{\"href\":\"/sellers/290b2ec9-fbe8-4bb1-9160-cadcf9182a23/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/5524\"}}}"
+  "{\"id\":\"1fc1c76c-750c-41d6-a9c3-5c5dd79bfd81\",\"name\":\"Mandalorian\",\"enrollment\":\"2018-12-06T17:58:16.000+0000\",\"level\":5,\"_links\":{\"self\":{\"href\":\"/sellers/1fc1c76c-750c-41d6-a9c3-5c5dd79bfd81\"},\"hasContacts\":{\"href\":\"/sellers/1fc1c76c-750c-41d6-a9c3-5c5dd79bfd81/contacts\"},\"hasScore\":{\"href\":\"/sellers/scores/5524\"}}}"
 ]
 
 
