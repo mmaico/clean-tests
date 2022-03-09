@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Test with Maturity level 0
+ * Test with Maturity level 1
  *  Statement BDD OK  <----
  *  Json Inside scenario file NOK
  *  Wiremock inside scenario file NOK
