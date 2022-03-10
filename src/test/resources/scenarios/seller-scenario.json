@@ -4,7 +4,7 @@
     "json": {
       "request": {
         "method": "GET",
-        "urlPath": "/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a"
+        "urlPath": "/api/salesman/53ac008b-9d16-4c36-afea-0e49c0c3515a"
       },
       "response": {
         "status": 200,
@@ -26,7 +26,7 @@
     "json": {
       "request": {
         "method": "GET",
-        "urlPath": "/sellers"
+        "urlPath": "/api/salesman"
       },
       "response": {
         "status": 200,
@@ -61,7 +61,7 @@
     "json": {
       "request": {
         "method": "GET",
-        "urlPathPattern": "^(\/sellers\/(ba262eb0-5178-4a94-9771-49dd77b1c846|f6724b21-6c23-40a6-960e-233574fad5de|cd694802-dd85-4248-b80f-d974a2d8dbe4)\/levels)$"
+        "urlPathPattern": "^(\/api\/salesman\/(ba262eb0-5178-4a94-9771-49dd77b1c846|f6724b21-6c23-40a6-960e-233574fad5de|cd694802-dd85-4248-b80f-d974a2d8dbe4)\/levels)$"
       },
       "response": {
         "status": 200,
@@ -79,7 +79,7 @@
     "json": {
       "request": {
         "method": "GET",
-        "urlPath": "/sellers/53ac008b-9d16-4c36-afea-0e49c0c3515a/levels"
+        "urlPath": "/api/salesman/53ac008b-9d16-4c36-afea-0e49c0c3515a/levels"
       },
       "response": {
         "status": 200,
@@ -108,7 +108,7 @@
     "json": {
       "request": {
         "method": "POST",
-        "urlPath": "/sellers",
+        "urlPath": "/api/salesman",
         "bodyPatterns": [
           {
             "equalToJson": "{ \"name\": \"Mandalorian\", \"scoreId\": \"5524\" }",
@@ -138,7 +138,7 @@
       "newScenarioState": "Call-2",
       "request": {
         "method": "GET",
-        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
+        "urlPath": "/api/salesman/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
       },
       "response": {
         "status": 500,
@@ -157,7 +157,7 @@
       "newScenarioState": "Call-$math.addMoreOne($count)",
       "request": {
         "method": "GET",
-        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
+        "urlPath": "/api/salesman/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
       },
       "response": {
         "status": 500,
@@ -175,7 +175,7 @@
       "requiredScenarioState": "Call-5",
       "request": {
         "method": "GET",
-        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
+        "urlPath": "/api/salesman/68dcf440-d1fe-4ff0-ae71-9db139f77a8e"
       },
       "response": {
         "status": 200,
@@ -196,7 +196,7 @@
     "json": {
       "request": {
         "method": "GET",
-        "urlPath": "/sellers/68dcf440-d1fe-4ff0-ae71-9db139f77a8e/levels"
+        "urlPath": "/api/salesman/68dcf440-d1fe-4ff0-ae71-9db139f77a8e/levels"
       },
       "response": {
         "status": 200,
