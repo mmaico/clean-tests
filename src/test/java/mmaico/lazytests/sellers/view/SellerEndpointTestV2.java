@@ -168,7 +168,4 @@ class SellerEndpointTestV2 extends BaseTest {
                             .withBody(response)));
     }
 
-
-
-
 }
