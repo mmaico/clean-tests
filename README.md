@@ -20,7 +20,9 @@
 5. Custom Comparator for dynamic fields
      > Configuring the snapshot lib to support dynamic fields(like a DB ids, date etc).  
     
-
+___
+#### Architecture that was tested using the priciples mentioned above
+![Architecture that will be tested](src/main/resources/sallers-arch.png)
 
  
  
