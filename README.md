@@ -22,7 +22,7 @@
     
 ___
 #### Architecture that was tested using the priciples mentioned above
-![Architecture that will be tested](src/main/resources/sallers-arch.png)
+![Architecture that will be tested](src/main/resources/sellers-arch.png)
 
  
  
