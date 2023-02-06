@@ -1,4 +1,4 @@
-## Lazy tests 
+## Clean tests 
 
  This project presents five concepts to improve your unit tests.
   
