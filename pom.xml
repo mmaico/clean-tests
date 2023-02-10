@@ -14,7 +14,7 @@
 	<name>clean-test</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -31,22 +31,17 @@
 			<artifactId>failsafe</artifactId>
 			<version>2.4.4</version>
 		</dependency>
+
 		<dependency>
-			<groupId>com.squareup.okhttp</groupId>
+			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
-			<version>2.7.5</version>
+			<version>4.10.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>dev.failsafe</groupId>
 			<artifactId>failsafe-okhttp</artifactId>
 			<version>3.2.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-			<version>2.6.4</version>
 		</dependency>
 
 		<!-- Tests with Junit 5 -->
@@ -116,44 +111,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>uol</id>
-			<name>UOL - Releases</name>
-			<url>https://mvn.repo.intranet/uol</url>
-		</repository>
-		<repository>
-			<id>SRC</id>
-			<url>https://mvn.intranet/uol/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>3RD</id>
-			<url>https://mvn.intranet/3rd/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jcenter-snapshots</id>
-			<name>jcenter</name>
-			<url>https://jcenter.bintray.com/</url>
-		</repository>
-		<repository>
-			<id>confluent</id>
-			<url>https://packages.confluent.io/maven/</url>
-		</repository>
-	</repositories>
-
 
 	<build>
 		<plugins>
